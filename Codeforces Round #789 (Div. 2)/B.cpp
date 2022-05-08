@@ -76,45 +76,6 @@ void solve(){
         if(s[i]!=temp[i])ans++;
     }
     cout<<ans<<endl;
-    vi arr;
-    cnt=1;
-    for(int i=1;i<sz(s);i++){
-        if(s[i]==s[i-1])cnt++;
-        else {
-            arr.push_back(cnt);
-            cnt=1;
-        }
-    }
-    arr.push_back(cnt);
-    pr(arr);
-    int k=ans;
-    vii a,b;
-    for(int i=0;i<sz(arr);i+=2){
-        a.push_back({arr[i],i});
-    }
-    for(int i=1;i<sz(arr);i+=2){
-        b.push_back({arr[i],i});
-    }
-    sort(all(a));
-    sort(all(b));
-    map<lli,bool> mp;
-    for(auto x:a){
-        if(x.F>k)break;
-        k-=x.F;
-        mp[x.S]=true;
-    }
-    int cnt1=0;
-    int sub=0;
-    for(int i=0;i<sz(arr);i+=2){
-        if(mp[i])cnt1++;
-        else {
-            sub+=(2*cnt1+1);
-            cnt1=0;
-        }
-    }
-    if(sub==0)sub+=(2*cnt1+1);
-    pr(mp);
-    pr(sub);
 }
 
 signed main(){
