@@ -42,22 +42,56 @@ template <class T> void prc(T a, T b) {cerr << "["; for (T i = a; i != b; ++i) {
 #endif
 lli binpow(lli b,lli p,lli mod){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=ans*b%mod;b=b*b%mod;}return ans;}
 
+lli bread=0,sausage=0,cheese=0;
+vi amt(3);
+vi price(3);
+lli r;
+void pre(){
+
+}
+bool check(lli mid){
+    lli tot_breads=max(mid*bread-amt[0],(lli)0);
+    lli tot_sausage=max(mid*sausage-amt[1],(lli)0);
+    lli tot_cheese=max(mid*cheese-amt[2],(lli)0);
+    lli money=r;
+    money-=(price[0]*tot_breads);
+    money-=(price[1]*tot_sausage);
+    money-=(price[2]*tot_cheese);
+    return (money>=0);
+}
+void solve(){
+    string s;
+    cin>>s;
+    fr(i,3)cin>>amt[i];
+    fr(i,3)cin>>price[i];
+    cin>>r;
+    fr(i,sz(s)){
+        if(s[i]=='B')bread++;
+        else if(s[i]=='S')sausage++;
+        else cheese++;
+    }
+    lli low=0;
+    lli high=1e13;
+    lli ans=0;
+    while(low<=high){
+        lli mid=(high+low)/2;
+        if(check(mid)){
+            ans=mid;
+            low=mid+1;
+        }else {
+            high=mid-1;
+        }
+    }
+    cout<<ans<<endl;
+}
+
 signed main(){
-    ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
-    int in1,in2;
-    while(cin>>in1>>in2){
-    	vi arr(in2);
-    	fr(i,in2)cin>>arr[i];
-    	map<lli,lli> mp;
-    	lli cnt=0;
-    	fr(i,in2){
-    		for(int j=i;j<=in1;j+=i){
-    			if(mp[j]==0){
-    				cnt++;
-    				mp[j]++;
-    			}
-    		}
-    	}
-    	cout<<in1-cnt<<endl;
+    ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+    pre();lli _t=1;//cin>>_t;
+    for(lli i=1;i<=_t;i++){
+        //cout<<"Case #"<<i<<": ";
+        solve();
     }
 }

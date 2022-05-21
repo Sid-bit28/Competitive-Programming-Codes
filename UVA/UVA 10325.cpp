@@ -45,7 +45,11 @@ lli binpow(lli b,lli p,lli mod){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=ans*b%
 signed main(){
     ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
     int in1,in2;
-    while(cin>>in1>>in2){
+    while(1){
+    	cin>>in1>>in2;
+    	if(in1&&in2){
+    		break;
+    	}
     	vi arr(in2);
     	fr(i,in2)cin>>arr[i];
     	map<lli,lli> mp;
