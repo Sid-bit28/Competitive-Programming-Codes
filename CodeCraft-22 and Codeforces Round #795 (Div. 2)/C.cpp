@@ -42,33 +42,62 @@ template <class T> void prc(T a, T b) {cerr << "["; for (T i = a; i != b; ++i) {
 #endif
 lli binpow(lli b,lli p,lli mod=MOD){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=ans*b%mod;b=b*b%mod;}return ans;}
 
+
+//1010011
 void pre(){
 
 }
-lli n,m;
-bool check(int x,int y){
-	if(x>=0&&x<n&&y>=0&&y<m)return true;
-	return false;
-}
 void solve(){
-	cin>>n>>m;
-	vector<vector<int>> arr(n,vector<int>(m));
-	vector<vector<int>> parity(n,vector<int>(m));
-	fr(i,n)fr(j,m){
-		cin>>arr[i][j];
-		parity[i][j]=arr[i][j]%2;
-	}
+	lli n,k;
+	cin>>n>>k;
+	string s;
+	cin>>s;
+	int cc=0;
 	fr(i,n){
-		fr(j,m){
-			if(((i+j)%2)^parity[i][j])arr[i][j]++;
+		if(s[i]=='1')cc++;
+	}
+	if(cc==0){
+		cout<<0<<endl;
+		return;
+	}
+	lli l=-1,r=-1;
+	for(int i=n-1;i>=0;i--){
+		if(s[i]=='1'){
+			r=i;
+			break;
 		}
 	}
-	fr(i,n){
-		fr(j,m){
-			cout<<arr[i][j]<<" ";
-		}
-		cout<<endl;
+	if(k>=(n-r-1)){
+		s[r]='0';
+		s[n-1]='1';
+		k-=(n-r-1);
 	}
+	fr(i,n){
+		if(s[i]=='1'){
+			l=i;
+			break;
+		}
+	}
+	if(cc==1&&s[n-1]=='1'){
+		cout<<1<<endl;
+		return;
+	}
+	if(k>=l){
+		s[l]='0';
+		s[0]='1';
+		k-=l;
+	}
+	lli ans=0;
+	fr(i,n-1){
+		if(s[i]=='1'&&s[i+1]=='0'){
+			ans+=10;
+		}else if(s[i]=='1'&&s[i+1]=='1'){
+			ans+=11;
+		}else if(s[i]=='0'&&s[i+1]=='1'){
+			ans+=1;
+		}
+	}
+	cout<<ans<<endl;
 }
 
 signed main(){

@@ -42,6 +42,7 @@ template <class T> void prc(T a, T b) {cerr << "["; for (T i = a; i != b; ++i) {
 #endif
 lli binpow(lli b,lli p,lli mod=MOD){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=ans*b%mod;b=b*b%mod;}return ans;}
 
+//1 1 3 3 4 4 5 5
 void pre(){
 
 }
@@ -50,11 +51,33 @@ void solve(){
 	cin>>n;
 	vi arr(n);
 	fr(i,n)cin>>arr[i];
-	set<int> s;
-	fr(i,n)s.insert(arr[i]);
-	if(sz(s)<n){
-		cout<<"YES"<<endl;
-	}else cout<<"NO"<<endl;
+	map<lli,vi> mp;
+	fr(i,n){
+		mp[arr[i]].push_back(i+1);
+	}
+	bool ok=true;
+	for(auto x:mp){
+		if(sz(x.S)==1){
+			ok=false;
+		}
+	}
+	if(!ok){
+		cout<<"-1"<<endl;
+		return;
+	}
+	for(auto &x:mp){
+		reverse(all(x.S));
+		lli last=(x.S).back();
+		(x.S).pop_back();
+		reverse(all(x.S));
+		(x.S).push_back(last);
+	}
+	for(auto x:mp){
+		for(auto y:x.S){
+			cout<<y<<" ";
+		}
+	}
+	cout<<endl;
 }
 
 signed main(){

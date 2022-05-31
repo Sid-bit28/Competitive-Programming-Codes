@@ -48,10 +48,14 @@ void pre(){
 void solve(){
 	lli n;
 	cin>>n;
+	vi arr(n);
+	fr(i,n)cin>>arr[i];
+	lli o=0,e=0;
 	fr(i,n){
-		cout<<1<<" ";
+		if(arr[i]&1)o++;
+		else e++;
 	}
-	cout<<endl;
+	cout<<min(o,e)<<endl;
 }
 
 signed main(){
