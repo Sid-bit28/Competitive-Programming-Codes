@@ -45,61 +45,34 @@ lli binpow(lli b,lli p,lli mod=MOD){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=an
 void pre(){
 
 }
+lli calc(lli n,lli a,lli d){
+	return a*n+(n*n*d-n*d)/2;
+}
 void solve(){
-	lli n;
-	cin>>n;
-	lli cnt=0;
-	lli sum=0;
-	int ok=1;
-	lli ans=INF;
-	while(1){
-		if(ok){
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}else {
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
+	lli n,a,b;
+	cin>>n>>a>>b;
+	lli sum1=n*(n+1)/2;
+	lli xx=n/a*a;
+	int nn=(xx-a)/a+1;
+	lli sum2=calc(nn,a,a);
+	lli xxx=n/b*b;
+	lli nnn=(xxx-b)/b+1;
+	lli sum3=calc(nnn,b,b);
+	lli lcm=(a*b)/__gcd(a,b);
+	lli sum4=0;
+	if(lcm<=n){
+		lli xxxx=n/lcm*lcm;
+		lli nnnn=(xxxx-lcm)/lcm+1;
+		sum4=calc(nnnn,lcm,lcm);
 	}
-	ans=min(ans,cnt+(n-sum));
-	
-	cnt=0;
-	ok=1;
-	sum=0;
-	while(1){
-		if(ok){
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}else {
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(sum-n));
-	cout<<ans<<endl;
+	cout<<sum1-sum2-sum3+sum4<<endl;
 }
 
 signed main(){
 	ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     //freopen("in.txt","r",stdin);
     //freopen("out.txt","w",stdout);
-	pre();lli _t=1;cin>>_t;
+	pre();lli _t=1;//cin>>_t;
 	for(lli i=1;i<=_t;i++){
         //cout<<"Case #"<<i<<": ";
 		solve();

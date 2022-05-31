@@ -48,51 +48,10 @@ void pre(){
 void solve(){
 	lli n;
 	cin>>n;
-	lli cnt=0;
-	lli sum=0;
-	int ok=1;
-	lli ans=INF;
-	while(1){
-		if(ok){
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}else {
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
+	fr(i,n){
+		cout<<1<<" ";
 	}
-	ans=min(ans,cnt+(n-sum));
-	
-	cnt=0;
-	ok=1;
-	sum=0;
-	while(1){
-		if(ok){
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}else {
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(sum-n));
-	cout<<ans<<endl;
+	cout<<endl;
 }
 
 signed main(){

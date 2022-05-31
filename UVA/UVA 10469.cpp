@@ -40,68 +40,12 @@ template <class T> void prc(T a, T b) {cerr << "["; for (T i = a; i != b; ++i) {
 #define debarr(a,n) {}
 #define debmat(mat,row,col) {}
 #endif
-lli binpow(lli b,lli p,lli mod=MOD){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=ans*b%mod;b=b*b%mod;}return ans;}
-
-void pre(){
-
-}
-void solve(){
-	lli n;
-	cin>>n;
-	lli cnt=0;
-	lli sum=0;
-	int ok=1;
-	lli ans=INF;
-	while(1){
-		if(ok){
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}else {
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(n-sum));
-	
-	cnt=0;
-	ok=1;
-	sum=0;
-	while(1){
-		if(ok){
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}else {
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(sum-n));
-	cout<<ans<<endl;
-}
+lli binpow(lli b,lli p,lli mod){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=ans*b%mod;b=b*b%mod;}return ans;}
 
 signed main(){
-	ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-    //freopen("in.txt","r",stdin);
-    //freopen("out.txt","w",stdout);
-	pre();lli _t=1;cin>>_t;
-	for(lli i=1;i<=_t;i++){
-        //cout<<"Case #"<<i<<": ";
-		solve();
-	}
+    ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+    lli a,b;
+    while(cin>>a>>b){
+    	cout<<(a^b)<<endl;
+    }
 }

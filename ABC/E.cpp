@@ -42,56 +42,29 @@ template <class T> void prc(T a, T b) {cerr << "["; for (T i = a; i != b; ++i) {
 #endif
 lli binpow(lli b,lli p,lli mod=MOD){lli ans=1;b%=mod;for(;p;p>>=1){if(p&1)ans=ans*b%mod;b=b*b%mod;}return ans;}
 
+const int mod=998244353;
 void pre(){
 
 }
 void solve(){
-	lli n;
-	cin>>n;
-	lli cnt=0;
-	lli sum=0;
-	int ok=1;
-	lli ans=INF;
-	while(1){
-		if(ok){
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}else {
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(n-sum));
+	lli n,m,k;
+	cin>>n>>m>>k;
 	
-	cnt=0;
-	ok=1;
-	sum=0;
-	while(1){
-		if(ok){
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}else {
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
+	vector<vector<lli>> dp(n,vector<lli> (m+1,0));
+	
+	for(int i=1;i<=m;i++){
+		dp[0][i]=1;
 	}
-	ans=min(ans,cnt+(sum-n));
+	for(int i=1;i<n;i++){
+		for(int j=1;j<=m;j++){
+			if(j-k>=1)dp[i][j]=(dp[i][j]+dp[i-1][j-k])%mod;
+			if(j+k<=m)dp[i][j]=(dp[i][j]+dp[i-1][j+k])%mod;
+		}
+	}
+	lli ans=0;
+	for(int i=1;i<=m;i++){
+		ans=(ans+dp[n-1][i])%mod;
+	}
 	cout<<ans<<endl;
 }
 
@@ -99,7 +72,7 @@ signed main(){
 	ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     //freopen("in.txt","r",stdin);
     //freopen("out.txt","w",stdout);
-	pre();lli _t=1;cin>>_t;
+	pre();lli _t=1;//cin>>_t;
 	for(lli i=1;i<=_t;i++){
         //cout<<"Case #"<<i<<": ";
 		solve();

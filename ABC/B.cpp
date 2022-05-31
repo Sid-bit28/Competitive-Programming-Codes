@@ -46,60 +46,31 @@ void pre(){
 
 }
 void solve(){
-	lli n;
-	cin>>n;
-	lli cnt=0;
-	lli sum=0;
-	int ok=1;
-	lli ans=INF;
-	while(1){
-		if(ok){
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}else {
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
+	lli n,m;
+	cin>>n>>m;
+	vector<string> s(n);
+	fr(i,n)cin>>s[i];
+	int x1=-1,y1=-1,x2=-1,y2=-1;
+	fr(i,n){
+		fr(j,m){
+			if(s[i][j]=='o'){
+				if(x1==-1){
+					x1=i;
+					y1=j;
+				}
+				x2=i;
+				y2=j;
 			}
 		}
-		if(sum==n)break;
-		ok=1-ok;
 	}
-	ans=min(ans,cnt+(n-sum));
-	
-	cnt=0;
-	ok=1;
-	sum=0;
-	while(1){
-		if(ok){
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}else {
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(sum-n));
-	cout<<ans<<endl;
+	cout<<abs(y2-y1)+abs(x2-x1)<<endl;
 }
 
 signed main(){
 	ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     //freopen("in.txt","r",stdin);
     //freopen("out.txt","w",stdout);
-	pre();lli _t=1;cin>>_t;
+	pre();lli _t=1;//cin>>_t;
 	for(lli i=1;i<=_t;i++){
         //cout<<"Case #"<<i<<": ";
 		solve();

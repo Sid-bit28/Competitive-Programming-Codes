@@ -1,0 +1,9 @@
+[
+	{
+		"correct_answers":
+		[
+			"NO\nYES\nYES\nYES\nYES\nYES\nNO\nYES"
+		],
+		"test": "8\n1 0 0 0\nB\n0 0 1 0\nAB\n1 1 0 1\nABAB\n1 0 1 1\nABAAB\n1 1 2 2\nBAABBABBAA\n1 1 2 3\nABABABBAABAB\n2 3 5 4\nAABAABBABAAABABBABBBABB\n1 3 3 10\nBBABABABABBBABABABABABABAABABA\n"
+	}
+]

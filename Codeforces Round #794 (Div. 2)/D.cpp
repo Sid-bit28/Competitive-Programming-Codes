@@ -46,53 +46,89 @@ void pre(){
 
 }
 void solve(){
-	lli n;
-	cin>>n;
-	lli cnt=0;
-	lli sum=0;
-	int ok=1;
-	lli ans=INF;
-	while(1){
-		if(ok){
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}else {
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
+	vi a(4);
+	fr(i,4)cin>>a[i];
+	string s;
+	cin>>s;
+	int n=sz(s);
+	vi marked(n,0);
+	fr(i,n){
+		if(i+1<n&&s[i]=='A'&&s[i+1]=='A'&&a[0]){
+			marked[i]=1;
+			a[0]--;
+		}else if(i+1<n&&s[i]=='B'&&s[i+1]=='B'&&a[1]){
+			marked[i]=1;
+			a[1]--;
 		}
-		if(sum==n)break;
-		ok=1-ok;
 	}
-	ans=min(ans,cnt+(n-sum));
-	
+	string naya;
+	fr(i,n){
+		if(!marked[i])naya.push_back(s[i]);
+	}
+	pr(naya);
+	auto b=a;
+	n=sz(naya);
+	marked.assign(n,0);
+	vi marked1(n,0);
+	fr(i,n){
+		if(i+1<n&&naya[i]=='A'&&naya[i+1]=='B'&&a[3]){
+			marked[i]=1;
+			marked[i+1]=1;
+			a[3]--;
+			i++;
+		}else if(i+1<n&&naya[i]=='B'&&naya[i+1]=='A'&&a[4]){
+			marked[i]=1;
+			marked[i+1]=1;
+			a[4]--;
+			i++;
+		}
+	}
+	fr(i,n){
+		if(!marked[i]&&naya[i]=='B'){
+			a[1]--;
+		}else if(!marked[i]&&naya[i]=='A'){
+			a[0]--;
+		}
+	}
+	int cnt=0;
+	fr(i,sz(a)){
+		if(a[i]==0)cnt++;
+	}
+	bool ok=false;
+	if(cnt==sz(a)){
+		ok=true;
+	}
+	fr(i,n){
+		if(i+1<n&&naya[i]=='B'&&naya[i+1]=='A'&&b[4]){
+			marked1[i]=1;
+			marked1[i+1]=1;
+			b[4]--;
+			i++;
+		}else if(i+1<n&&naya[i]=='A'&&naya[i+1]=='B'&&b[3]){
+			marked1[i]=1;
+			marked1[i+1]=1;
+			b[3]--;
+			i++;
+		}
+	}
+	fr(i,n){
+		if(!marked1[i]&&naya[i]=='B'){
+			b[1]--;
+		}else if(!marked1[i]&&naya[i]=='A'){
+			b[0]--;
+		}
+	}
 	cnt=0;
-	ok=1;
-	sum=0;
-	while(1){
-		if(ok){
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}else {
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
+	fr(i,sz(b)){
+		if(b[i]==0)cnt++;
 	}
-	ans=min(ans,cnt+(sum-n));
-	cout<<ans<<endl;
+	if(cnt==sz(b)){
+		ok=true;
+	}
+	if(ok){
+		cout<<"YES"<<endl;
+	}else cout<<"NO";
+	cout<<endl;
 }
 
 signed main(){

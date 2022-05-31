@@ -46,60 +46,20 @@ void pre(){
 
 }
 void solve(){
-	lli n;
-	cin>>n;
-	lli cnt=0;
-	lli sum=0;
-	int ok=1;
-	lli ans=INF;
-	while(1){
-		if(ok){
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}else {
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(n-sum));
-	
-	cnt=0;
-	ok=1;
-	sum=0;
-	while(1){
-		if(ok){
-			if(sum+2>n)break;
-			else {
-				sum+=2;
-				cnt++;
-			}
-		}else {
-			if(sum+3>n)break;
-			else {
-				sum+=3;
-				cnt++;
-			}
-		}
-		if(sum==n)break;
-		ok=1-ok;
-	}
-	ans=min(ans,cnt+(sum-n));
-	cout<<ans<<endl;
+	vi arr(3);
+	fr(i,3)cin>>arr[i];
+	lli x=arr[1];
+	sort(all(arr));
+	if(arr[1]==x){
+		cout<<"Yes"<<endl;
+	}else cout<<"No"<<endl;
 }
 
 signed main(){
 	ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     //freopen("in.txt","r",stdin);
     //freopen("out.txt","w",stdout);
-	pre();lli _t=1;cin>>_t;
+	pre();lli _t=1;//cin>>_t;
 	for(lli i=1;i<=_t;i++){
         //cout<<"Case #"<<i<<": ";
 		solve();
